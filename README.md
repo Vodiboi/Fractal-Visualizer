@@ -5,7 +5,18 @@ This is a guide to using Barry's Fractal Visualizer.
 
 ## Setup
 
-### 0. Installs
+### 0. Clone the Repo
+---
+run
+```
+git clone https://github.com/Vodiboi/Fractal-Visualizer.git
+```
+in a terminal window, within the folder you want this folder to show up in. Then, cd into the folder:
+```
+cd -
+```
+
+### 1. Installs
 ---
 make sure to install manim, pillow, numpy, and flet
 (in theory, the below installs should work. If not, do some googling, and maybe let me know if something is fundamentally wrong)
@@ -21,17 +32,10 @@ Alternatively, you can try installing from the requirements file (although this 
 ```
 pip3 install -r requirements.txt 
 ```
-
-### 1. Clone the Repo
----
-```
-git clone https://github.com/Vodiboi/Fractal-Visualizer.git
-```
 ### 2. Run it
 
 then, cd into the repo and run main.py
 ```
-cd -
 python3 main.py
 ```
 and boom
