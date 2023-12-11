@@ -2,9 +2,11 @@ import os
 import base64
 from io import BytesIO
 import subprocess
+
 import flet as ft
 from PIL import Image as image
 import numpy as np
+
 import parseThing
 from dimension import getDimension
 from mathstuff import recursively_subdivide

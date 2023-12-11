@@ -1,7 +1,7 @@
 from manim import *
-import mathstuff
 from typing import *
 import numpy as np
+import mathstuff
 import mathInfo
 
 def transform(pt:complex, r:int, theta:int, shift:complex) -> complex:

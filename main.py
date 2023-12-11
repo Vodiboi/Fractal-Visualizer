@@ -1,7 +1,7 @@
 if __name__ != "__main__": exit(0)
-from visualizer import runApp
-import flet as ft
 import sys
+import flet as ft
+from visualizer import runApp
 
 
 d = {

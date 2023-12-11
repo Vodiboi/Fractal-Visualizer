@@ -31,6 +31,7 @@ pip3 install manim==0.18.0
 pip3 install Pillow==9.2.0
 pip3 install numpy==1.24.3
 pip3 install flet==0.15.0
+pip3 install pygame==2.1.3
 ```
 
 ### 2. Run it
