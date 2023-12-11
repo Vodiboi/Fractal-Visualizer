@@ -221,6 +221,23 @@ def pygame_visualizer(page:ft.Page):
             height=50,
         )
 
+    def onSave(e: ft.FilePickerResultEvent):
+        filee = e.path
+        if filee is None or not filee.endswith(".png"):
+            error_log.value = "Invalid File Name when saving! Make sure to include .png at the end"
+            error_log.update()
+            return
+        elif error_log.value == "Invalid File Name when saving! Make sure to include .png at the end":
+            error_log.value = ""
+            error_log.update()
+        imgg = image.open("mainPygameImage.png")
+        imgg.save(filee)
+
+    file_picker = ft.FilePicker(on_result=onSave)
+    page.add(file_picker)
+    savebutton = ft.TextButton(icon="download", text="save image", on_click=lambda _: file_picker.save_file(file_type=ft.FilePickerFileType.IMAGE))
+
+
     def use_preset(*_):
         with open(f"presets/{presets.value}.txt") as filee:
             d = filee.read()
@@ -241,7 +258,7 @@ def pygame_visualizer(page:ft.Page):
 
     # our main image
     img = ft.Image(src=_f2src, width=500, height=500, fit=ft.ImageFit.CONTAIN)
-
+    
     def reloadMath(structs):
         '''
         reloads data in mathstuff.py
@@ -342,7 +359,7 @@ def pygame_visualizer(page:ft.Page):
     # display layout. Everything in wrapped in a container in order to select padding
     r = ft.Container(content=ft.Row([
         ft.Column(controls=[
-            ft.Row([btn, helpp], spacing=300),
+            ft.Row([btn, savebutton, helpp], spacing=150),
             f,
             error_log
         ],
@@ -364,12 +381,214 @@ def pygame_visualizer(page:ft.Page):
     page.add(r)
     page.update()
 
-def runApp(view=ft.AppView.FLET_APP, version="manim"):
+def pygame_for_saving(page: ft.Page):
+    '''
+    Flet App for a Fractal Visualizer using Manim to render the underlying image
+    '''
+    # page stuff
+    page.title = "J's Fractal Visualizer"
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.window_maximized = True
+
+    # most widgets
+    f = ft.TextField(label="Write your code here", multiline=True)
+    start_pos = ft.TextField(label="Starting Position")
+    end_pos = ft.TextField(label="Ending Position")
+    depth = ft.TextField(label="Number of Recursions")
+    error_log = ft.TextField(label="Errors Listed Here:", read_only=True)
+    error_log.value = ""
+    dimension = ft.TextField(label="Dimension: ", read_only=True)
+    # presets = ft.Dropdown(
+    #     width=400,
+    #     options=[ft.dropdown.Option(i[:i.find(".txt")]) for i in os.listdir("presets/")],
+    #     label="Select Preset"
+    # )
+
+    # def boxSliderChange(e):
+    boxSliderLabel = ft.Text(value="The resolution of boxes: ")
+    boxSlider = ft.Slider(
+        min=0,
+        max=8,
+        divisions=8,
+        label="{value}",
+        value=0
+    )
+    boxCount = ft.TextField(label="Box Count: ", value="N/A", read_only=True)
+    with open("help.txt", "r") as filey:
+        helpp = ft.PopupMenuButton(
+            items=[
+                ft.PopupMenuItem(content=ft.Text(filey.read()))
+            ],
+            icon="info", 
+            width=100, 
+            height=50,
+        )
+    def onSave(e: ft.FilePickerResultEvent):
+        filee = e.path
+        if filee is None or not filee.endswith(".png"):
+            error_log.value = "Invalid File Name when saving! Make sure to include .png at the end"
+            error_log.update()
+            return
+        elif error_log.value == "Invalid File Name when saving! Make sure to include .png at the end":
+            error_log.value = ""
+            error_log.update()
+        imgg = image.open("mainPygameImage.png")
+        imgg.save(filee)
+
+    file_picker = ft.FilePicker(on_result=onSave)
+    page.add(file_picker)
+    savebutton = ft.TextButton(icon="download", text="save image", on_click=lambda _: file_picker.save_file(file_type=ft.FilePickerFileType.IMAGE))
+
+    # def use_preset(*_):
+    #     with open(f"presets/{presets.value}.txt") as filee:
+    #         d = filee.read()
+    #     f.value = d
+    #     f.update()
+    #     if (start_pos.value == ""):
+    #         start_pos.value = "0"
+    #         start_pos.update()
+    #     if (end_pos.value == ""):
+    #         end_pos.value = "1"
+    #         end_pos.update()
+    #     if (depth.value == ""):
+    #         depth.value = "1"
+    #         depth.update()
+
+    # add the preset button
+    # usePreset = ft.TextButton("Use Preset", on_click=use_preset)
+
+    # our main image
+    img = ft.Image(src=_f2src, width=500, height=500, fit=ft.ImageFit.CONTAIN)
+
+    def reloadMath(structs):
+        '''
+        reloads data in mathstuff.py
+        '''
+        with open(os.getcwd() + "/mathInfo.py", "r") as filee:
+            l = filee.read()
+        l = l.split("\n")
+        lines = [tuple([[complex(i).real, complex(i).imag] for i in j]) for j in structs["Main"]()]
+        for i in range(len(l)):
+            if l[i].startswith("RECURSIVE_PARTS"):
+                l[i] = "RECURSIVE_PARTS = " + str(lines)
+            elif l[i].startswith("PARTS_TO_SUBDIVIDE"):
+                subdiv = str(structs["Main"].partsToSubdivide)
+                # print(subdiv)
+                if (subdiv == "ALL_TRUE"):
+                    l[i] = "PARTS_TO_SUBDIVIDE = " + str([True]*len(lines))
+                elif subdiv == "ALL_FALSE":
+                    l[i] = "PARTS_TO_SUBDIVIDE = " + str([False]*len(lines))
+                else:
+                    l[i] = "PARTS_TO_SUBDIVIDE = " + str(structs["Main"].partsToSubdivide)
+            elif l[i].startswith("START = "):
+                if start_pos.value == "" or (not isinstance(eval(start_pos.value), int) and not isinstance(eval(start_pos.value), complex) and not isinstance(eval(start_pos.value), float)):
+                    error_log.value = "Error: Invalid Start Pos. Must Be Int or Complex or Float"
+                    error_log.update()
+                    return
+                else:
+                    l[i] = "START = " + start_pos.value
+            elif l[i].startswith("END = "):
+                if end_pos.value == "" or (not isinstance(eval(end_pos.value), int) and not isinstance(eval(end_pos.value), complex) and not isinstance(eval(start_pos.value), float)):
+                    error_log.value = "Error: Invalid End Pos. Must Be Int or Complex or Float"
+                    error_log.update()
+                    return
+                else:
+                    l[i] = "END = " + end_pos.value
+            elif l[i].startswith("NUM_RECURSIONS = "):
+                if depth.value == "" or (not isinstance(eval(depth.value), int)):
+                    error_log.value = "Error: Invalid Number of Recursions. Must Be Int"
+                    error_log.update()
+                    return
+                else:
+                    l[i] = "NUM_RECURSIONS = " + depth.value
+            elif l[i].startswith("DRAW_BOXES"):
+                l[i] = "DRAW_BOXES = " + str((None if boxSlider.value == 0 else int(10-boxSlider.value)))
+            
+        with open("mathInfo.py", "w") as filee:
+            filee.write("\n".join(l))
+
+
+    def update(*_):
+        error_log.value = ""
+        error_log.update()
+        code = f.value
+        structs = parseThing.genShapesTwo(code)
+        reloadMath(structs=structs)
+
+        try:
+            process = subprocess.run(
+                ["python3", "renderer_pygame.py"],
+                capture_output=True,
+                timeout=5.0,
+                text=True
+            )
+            if process.returncode != 0:
+                error_log.value = "Renderer error: " + process.stderr
+                error_log.update()
+                return
+            output = process.stdout.strip().split("\n")
+            dimension.value = output[0].strip()
+            dimension.update()
+            boxCount.value = "N/A" if boxSlider.value == 0 else output[1].strip()
+            boxCount.update()
+        except subprocess.TimeoutExpired:
+            error_log.value = "Too many lines to render. Please reduce the # of recursions and/or the # of line segments."
+            error_log.update()
+            return
+        
+        # dimension.update()
+
+        # stack overflow shenanigans in order to use the image
+        pil_photo = image.open(_f2src)
+        arr = np.asarray(pil_photo)
+        pil_img = image.fromarray(arr)
+        buff = BytesIO()
+        pil_img.save(buff, format="PNG")
+        newstring = base64.b64encode(buff.getvalue()).decode("utf-8")
+        img.src_base64 = newstring
+        img.update()
+
+    # add the run button
+    btn = ft.ElevatedButton(
+        text="Run", 
+        on_click=update, 
+        icon="play_circle", 
+        width=100, 
+        height=50, 
+    )
+
+    # display layout. Everything in wrapped in a container in order to select padding
+    r = ft.Container(content=ft.Row([
+        ft.Column(controls=[
+            ft.Row([btn, savebutton, helpp], spacing=150),
+            f,
+            error_log,
+        ],
+        expand=1, spacing=10, 
+        scroll=ft.ScrollMode.ALWAYS,
+        height=700
+        ),
+        ft.Column(controls=[
+            ft.Row([start_pos, end_pos]),
+            ft.Row([depth, dimension]),
+            ft.Row([boxSliderLabel, boxSlider, boxCount]),
+            img
+        ]
+        ),
+    ]), padding=10)
+
+    # kaboom!
+    page.add(r)
+    page.update()
+
+def runApp(view=ft.AppView.FLET_APP, version="pygame"):
     match version:
         case "manim":
             ft.app(target=manim_visualizer, view=view)
         case "pygame":
             ft.app(target=pygame_visualizer, view=view)
+        case "save":
+            ft.app(target=pygame_for_saving, view=view)
 
     # code that runs when the app is closed
     i2 = image.open("defaultManimImg.png")

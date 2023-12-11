@@ -5,8 +5,8 @@ with open(os.devnull, "w") as devnull:
         import pygame
 import numpy as np
 
-BG_COLOR = 0, 0, 0
-LINE_COLOR = 255, 255, 255
+BG_COLOR = 255, 255, 255
+LINE_COLOR = 0, 0, 0
 BOX_COLOR = 32, 135, 159
 
 def get_mat(a, b, t=False):

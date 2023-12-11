@@ -84,3 +84,29 @@ def generateShapes(file:str) -> Dict[str, Shape]:
             elif line.startswith("NUM_RECURSIONS = "):
                 curShape.num_rec = eval(line[17:])
     return ans
+
+
+def genShapesTwo(file:str) -> Dict[str, Shape]:
+    with open("userprogramthing.py", "w") as f:
+        f.write(file)
+    import userprogramthing
+    shpe = Shape()
+    RECURSIVE_PARTS = []
+    PARTS_TO_SUBDIVIDE = []
+    RECURSIVE_POINTS = []
+    if hasattr(userprogramthing, "RECURSIVE_PARTS"):
+        RECURSIVE_PARTS = userprogramthing.RECURSIVE_PARTS
+    if hasattr(userprogramthing, "RECURSIVE_POINTS"):
+        RECURSIVE_POINTS = userprogramthing.RECURSIVE_POINTS
+    if hasattr(userprogramthing, "PARTS_TO_SUBDIVIDE"):
+        PARTS_TO_SUBDIVIDE = userprogramthing.PARTS_TO_SUBDIVIDE
+    if len(RECURSIVE_PARTS):
+        for l in RECURSIVE_PARTS:
+            shpe.lines.append(f"({complex(l[0][0], l[0][1])}, {complex(l[1][0], l[1][1])})")
+    elif len(RECURSIVE_POINTS):
+        for i in range(len(RECURSIVE_POINTS)-1):
+            shpe.lines.append(f"({complex(RECURSIVE_POINTS[i][0], RECURSIVE_POINTS[i][1])}, {complex(RECURSIVE_POINTS[i+1][0], RECURSIVE_POINTS[i+1][1])})")
+    if len(PARTS_TO_SUBDIVIDE):
+        shpe.partsToSubdivide = PARTS_TO_SUBDIVIDE
+    print(shpe.lines)
+    return {"Main":shpe}
