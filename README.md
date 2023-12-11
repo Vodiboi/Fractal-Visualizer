@@ -25,7 +25,7 @@ pip3 install -r requirements.txt
 ### 1. Clone the Repo
 ---
 ```
-git clone https://github.com/Vodiboi/Fractal-Generator.git
+git clone https://github.com/Vodiboi/Fractal-Visualizer.git
 ```
 ### 2. Run it
 
