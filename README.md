@@ -27,10 +27,10 @@ pip3 install -r requirements.txt
 Alternatively, you can install manually. (in theory, the below installs should work. If not, do some googling, and maybe let me know if something is fundamentally wrong)
 
 ```
-pip3 install manim
-pip3 install pillow
-pip3 install numpy
-pip3 install flet
+pip3 install manim==0.18.0
+pip3 install Pillow==9.2.0
+pip3 install numpy==1.24.3
+pip3 install flet==0.15.0
 ```
 
 ### 2. Run it
