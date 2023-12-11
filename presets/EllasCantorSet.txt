@@ -11,5 +11,5 @@ struct EllasCantorSet{
 }
 
 struct Main{
-    useshape CantorSet()
+    useshape EllasCantorSet()
 }
