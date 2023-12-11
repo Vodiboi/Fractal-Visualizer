@@ -1,0 +1,12 @@
+% Anish Fractal
+struct Anish{
+    let a = 0.2
+    line(0, 2*$a-($a*1j))
+    line(2*$a-($a*1j), 3*$a + ($a*1j))
+    line(3*$a + ($a*1j), 1)
+    subdivideList = "ALL_TRUE"
+}
+
+struct Main{
+    useshape Anish()
+}
