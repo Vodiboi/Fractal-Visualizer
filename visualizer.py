@@ -36,6 +36,16 @@ def manim_visualizer(page: ft.Page):
         label="Select Preset"
     )
 
+    with open("help.txt", "r") as filey:
+        helpp = ft.PopupMenuButton(
+            items=[
+                ft.PopupMenuItem(content=ft.Text(filey.read()))
+            ],
+            icon="info", 
+            width=100, 
+            height=50,
+        )
+
     def use_preset(*_):
         with open(f"presets/{presets.value}.txt") as filee:
             d = filee.read()
@@ -144,8 +154,9 @@ def manim_visualizer(page: ft.Page):
     # display layout. Everything in wrapped in a container in order to select padding
     r = ft.Container(content=ft.Row([
         ft.Column(controls=[
-            btn,
-            f
+            ft.Row([btn, helpp], spacing=300),
+            f,
+            error_log
         ],
         expand=1, spacing=10, 
         scroll=ft.ScrollMode.ALWAYS,
@@ -155,7 +166,6 @@ def manim_visualizer(page: ft.Page):
             ft.Row([presets, usePreset]),
             ft.Row([start_pos, end_pos]),
             ft.Row([depth, dimension]),
-            error_log,
             img
         ]
         ),
@@ -199,6 +209,15 @@ def pygame_visualizer(page:ft.Page):
         value=0
     )
     boxCount = ft.TextField(label="Box Count: ", value="N/A", read_only=True)
+    with open("help.txt", "r") as filey:
+        helpp = ft.PopupMenuButton(
+            items=[
+                ft.PopupMenuItem(content=ft.Text(filey.read()))
+            ],
+            icon="info", 
+            width=100, 
+            height=50,
+        )
 
     def use_preset(*_):
         with open(f"presets/{presets.value}.txt") as filee:
@@ -229,7 +248,6 @@ def pygame_visualizer(page:ft.Page):
             l = filee.read()
         l = l.split("\n")
         lines = [tuple([[complex(i).real, complex(i).imag] for i in j]) for j in structs["Main"]()]
-        # print(len(lines), "LINECNT")
         for i in range(len(l)):
             if l[i].startswith("RECURSIVE_PARTS"):
                 l[i] = "RECURSIVE_PARTS = " + str(lines)
@@ -268,10 +286,6 @@ def pygame_visualizer(page:ft.Page):
             
         with open("mathInfo.py", "w") as filee:
             filee.write("\n".join(l))
-        
-        # divided = [tuple([[complex(i).real, complex(i).imag] for i in j]) for j in recursively_subdivide(eval(start_pos.value), eval(end_pos.value), eval(depth.value))]
-        # dimension.value = str(get_dim(get_grid(divided, 16)))
-        # dimension.value = str(np.log2(getDimension(divided, 64) / getDimension(divided, 32)))
 
 
     def update(*_):
@@ -280,7 +294,6 @@ def pygame_visualizer(page:ft.Page):
         code = f.value
         structs = parseThing.generateShapes(code)
         reloadMath(structs=structs)
-        # d = _f2src.replace(' ', '\\ ')
 
         try:
             process = subprocess.run(
@@ -327,8 +340,9 @@ def pygame_visualizer(page:ft.Page):
     # display layout. Everything in wrapped in a container in order to select padding
     r = ft.Container(content=ft.Row([
         ft.Column(controls=[
-            btn,
-            f
+            ft.Row([btn, helpp], spacing=300),
+            f,
+            error_log
         ],
         expand=1, spacing=10, 
         scroll=ft.ScrollMode.ALWAYS,
@@ -339,7 +353,6 @@ def pygame_visualizer(page:ft.Page):
             ft.Row([start_pos, end_pos]),
             ft.Row([depth, dimension]),
             ft.Row([boxSliderLabel, boxSlider, boxCount]),
-            error_log,
             img
         ]
         ),
