@@ -83,6 +83,18 @@ The flow of the program revolves around the shape `Main`. `Main` is the shape th
 
 The `useshape X()` command uses the shape `X`. This adds all lines from `X` in order to the shape the command is being called in, and adds on the subdivideList in order as well (works even for `"ALL_TRUE"` and `"ALL_FALSE"`). 
 
+Shapes can also be defined in a different manner. Consider the code snippet: 
+
+```
+linelist RisingCantor = [(0+0.5j,1/3+0.5j),(2/3+0.5j,1+0.5j)];"ALL_TRUE"
+
+struct Main{
+    useshape RisingCantor()
+}
+```
+
+Here, a shape is defined using the `linelist` command. This command treats the shape like a class object in some sense. There are 2 parameters, seperated by a semicolon. The first is the list of segments, written out as a `List[Tuple[complex]]`, where each tuple represents a line between its elements. The second parameter is the subdivideList of this shape. This shape can now be used in the useshape command like any other shape.
+
 ## FAQ
 ### Q: "Why isn't the image loading"
 There are 2 possible answers to this. 1, it might just be taking some time to load, or loading for the first time, in which case it should load within 15 seconds. If it takes longer than this, look to the terminal output of the code. If there is some sort of error, you likely inputted the code wrong. Possible issues include:
