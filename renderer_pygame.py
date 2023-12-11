@@ -45,8 +45,7 @@ def scale_segments(segments):
     """
     segments = np.reshape(segments, (-1, 2))
     segments -= np.min(segments, axis=0)
-    if (bound := np.max(segments, axis=(0, 1))) != 0:
-        segments /= bound
+    segments /= np.max(segments, axis=(0, 1)) + 0.1
     segments += 0.5 - (np.max(segments, axis=0) - np.min(segments, axis=0)) / 2
 
 def get_grid(segments, density):
