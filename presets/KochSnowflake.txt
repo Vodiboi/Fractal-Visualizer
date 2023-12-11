@@ -1,4 +1,6 @@
+% The Koch Snowflake!
 struct KochSnowflake{
+    % variables, can be played around with
     let width = 0.5
     let height = 0.2
     
@@ -6,7 +8,7 @@ struct KochSnowflake{
     line((1-$width)/2, 0.5+(1j*$height))
     line(0.5+(1j*$height), (1+$width)/2)
     line((1+$width)/2, 1)
-    subdivideList = "ALL_TRUE"
+    subdivideList = "ALL_TRUE" % equivelent to 4 "True"s
 }
 
 struct Main{
