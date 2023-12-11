@@ -42,29 +42,39 @@ The basics of this tool can be learnt with the presets. Select a preset, and the
 
 Now, into the code itself. The language revolves around shapes, which are used as fractals. To learn this language, we will look at an example bit of code.
 
+
 ```
-% fractal of a man flexing his muscles, or a ram
-struct BodyBuilder{
-    % Use 9-10 recursions to see the man, and for optimal viewing set the starting position to be -2-2j and the ending position to be 2-2j
-    line(0, 0.5+0.5j)
-    line(0.5+0.5j, 1)
-    subdivideList = "ALL_TRUE"
+% The Koch Snowflake!
+struct KochSnowflake{
+    % variables, can be played around with
+    let width = 0.5
+    let height = 0.2
+    
+    line(0, (1-$width)/2)
+    line((1-$width)/2, 0.5+(1j*$height))
+    line(0.5+(1j*$height), (1+$width)/2)
+    line((1+$width)/2, 1)
+    subdivideList = "ALL_TRUE" % equivelent to 4 "True"s
 }
 
 struct Main{
-    useshape BodyBuilder()
+    useshape KochSnowflake()
 }
 ```
+
 To define a shape, we say `struct SHAPENAME` followed by curly braces. Line breaks are neccecary, as opposed to semicolons. 
-Comments are placed after a `%` symbol, similar to latex.
-Lines are defined with the line command, which takes in 2 points for a line to be placed between
-subdivideList is a list of booleans(`True`/`False`) that represents which lines should shapes be placed upon in the next fractal iteration. It can be set to `"ALL_TRUE"` or `"ALL_FALSE"` to save writing many spaces.
+
+Comments are placed after a `%` symbol, similar to latex, and extend for the rest of the line, similar to python.
+
+Lines are defined with the line command, which takes in 2 points (python complex, ex: `0.5`, `1+2j`, `(math.pi+4)*1j`) for a line to be placed between.
+
+Variables are defined using the `let` command. They are very nitpicky. there should be exactly 1 space between the variable name and `=`, and at least 1 space afterwards. The variable name may not contain any spaces. Variables are accesed with `$VAR_NAME` where "VAR_NAME" is the name of the variable. This prevents user overloading of commands in the code, among other things. 
+
+subdivideList is a list of booleans(`True`/`False`) that represents which lines should shapes be placed upon in the next fractal iteration. It can be set to `"ALL_TRUE"` or `"ALL_FALSE"` to save writing many spaces. Don't use it as a variable.
 
 The flow of the program revolves around the shape `Main`. `Main` is the shape that is visualized when clicking the `run` button. Typically, programs should minimize the code in Main directly, and instead reference other shapes using the `useshape` command.
 
 The `useshape X()` command uses the shape `X`. This adds all lines from `X` in order to the shape the command is being called in, and adds on the subdivideList in order as well (works even for `"ALL_TRUE"` and `"ALL_FALSE"`). 
-
-
 
 ## FAQ
 ### Q: "Why isn't the image loading"
