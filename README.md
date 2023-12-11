@@ -41,6 +41,8 @@ python3 main.py
 ```
 and boom
 
+Note: A popup may appear asking whether to allow flet to access files within the folder of the computer the code is running in (or a subfolder of that folder). Allow it to, otherwise the images cannot be displayed.  
+
 ## How to use the tool
 
 The basics of this tool can be learnt with the presets. Select a preset, and then click the button that says `use preset`. This button loads in the preset. By default, the start and end points are `0` and `1`, and the recursion depth is `1`. The start and end points represent the inital position (with that, scale and rotation) of your fractal. To see the fractal, click the `run` button Play around with these parameters on some samples.
