@@ -38,7 +38,32 @@ and boom
 
 ## How to use the tool
 
-The basics of this tool can be learnt with the presets. Select a preset, and then 
+The basics of this tool can be learnt with the presets. Select a preset, and then click the button that says `use preset`. This button loads in the preset. By default, the start and end points are `0` and `1`, and the recursion depth is `1`. The start and end points represent the inital position (with that, scale and rotation) of your fractal. To see the fractal, click the `run` button Play around with these parameters on some samples.
+
+Now, into the code itself. The language revolves around shapes, which are used as fractals. To learn this language, we will look at an example bit of code.
+
+```
+% fractal of a man flexing his muscles, or a ram
+struct BodyBuilder{
+    % Use 9-10 recursions to see the man, and for optimal viewing set the starting position to be -2-2j and the ending position to be 2-2j
+    line(0, 0.5+0.5j)
+    line(0.5+0.5j, 1)
+    subdivideList = "ALL_TRUE"
+}
+
+struct Main{
+    useshape BodyBuilder()
+}
+```
+To define a shape, we say `struct SHAPENAME` followed by curly braces. Line breaks are neccecary, as opposed to semicolons. 
+Comments are placed after a `%` symbol, similar to latex.
+Lines are defined with the line command, which takes in 2 points for a line to be placed between
+subdivideList is a list of booleans(`True`/`False`) that represents which lines should shapes be placed upon in the next fractal iteration. It can be set to `"ALL_TRUE"` or `"ALL_FALSE"` to save writing many spaces.
+
+The flow of the program revolves around the shape `Main`. `Main` is the shape that is visualized when clicking the `run` button. Typically, programs should minimize the code in Main directly, and instead reference other shapes using the `useshape` command.
+
+The `useshape X()` command uses the shape `X`. This adds all lines from `X` in order to the shape the command is being called in, and adds on the subdivideList in order as well (works even for `"ALL_TRUE"` and `"ALL_FALSE"`). 
+
 
 
 ## FAQ
