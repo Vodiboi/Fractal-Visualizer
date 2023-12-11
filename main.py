@@ -1,2 +1,3 @@
-from fletthing import runApp
-runApp()
+from visualizer import runApp
+import sys
+runApp(version=sys.argv[1])

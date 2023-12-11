@@ -33,6 +33,9 @@ def draw_line(mat, x0, y0, x1, y1, inplace=False):
 
 INF = int(1e9)
 def getDimension(lines:List[Tuple[Tuple[int, int]]], res = 16) -> int:
+    '''
+    In theory, computes the dimension of the lines provided
+    '''
     if res == 0: return 1
     # grid = [[0]*res for i in range(res)]
     grid = np.zeros((res, res))
@@ -69,8 +72,8 @@ def getDimension(lines:List[Tuple[Tuple[int, int]]], res = 16) -> int:
     #         print(grid[i][j], end = "")
     #     print()
     # print(res, sum([sum(i) for i in grid]))
-    print(res)
-    print(grid)
+    # print(res)
+    # print(grid)
     return grid.sum()
 
 

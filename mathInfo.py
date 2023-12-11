@@ -3,4 +3,5 @@ RECURSIVE_PARTS = [([0.0, 0.0], [1.0, 0.0]), ([0.0, 0.0], [0.5, 0.86602540378443
 PARTS_TO_SUBDIVIDE = [False, False, False, True, True, True]
 START = 0
 END = 1
-NUM_RECURSIONS = 5
+NUM_RECURSIONS = 14
+DRAW_BOXES = 4
