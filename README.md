@@ -13,13 +13,18 @@ git clone https://github.com/Vodiboi/Fractal-Visualizer.git
 ```
 in a terminal window, within the folder you want this folder to show up in. Then, cd into the folder:
 ```
-cd -
+cd Fractal-Visualizer 
 ```
 
 ### 1. Installs
 ---
-make sure to install manim, pillow, numpy, and flet
-(in theory, the below installs should work. If not, do some googling, and maybe let me know if something is fundamentally wrong)
+make sure to install manim, pillow, numpy, and flet from the requirements file:
+
+```
+pip3 install -r requirements.txt 
+```
+
+Alternatively, you can install manually. (in theory, the below installs should work. If not, do some googling, and maybe let me know if something is fundamentally wrong)
 
 ```
 pip3 install manim
@@ -27,14 +32,10 @@ pip3 install pillow
 pip3 install numpy
 pip3 install flet
 ```
-Alternatively, you can try installing from the requirements file (although this might not always work for you)
 
-```
-pip3 install -r requirements.txt 
-```
 ### 2. Run it
 
-then, cd into the repo and run main.py
+Now, run main.py
 ```
 python3 main.py
 ```
