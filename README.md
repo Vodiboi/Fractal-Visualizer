@@ -41,7 +41,7 @@ python3 main.py
 ```
 and boom
 
-Note: A popup may appear asking whether to allow flet to access files within the folder of the computer the code is running in (or a subfolder of that folder). Allow it to, otherwise the images cannot be displayed.  
+Note: A popup may appear asking whether to allow flet to access files within a folder of the computer the code is running in. Allow it to, otherwise the images cannot be displayed. Flet is not trying to access your personal files, don't worry, it justs needs to access some files for the code.
 
 ## How to use the tool
 
