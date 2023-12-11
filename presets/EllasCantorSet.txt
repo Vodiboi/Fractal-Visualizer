@@ -1,0 +1,15 @@
+struct EllasCantorSet{
+    let ARMS = 0.5
+    let PLACEMENT = 0.9
+    let ANGLE = math.pi/6
+
+    line(0, $PLACEMENT)
+    line($PLACEMENT, ($PLACEMENT+$ARMS*math.cos($ANGLE))+(1j*($ARMS*math.sin($ANGLE))))
+    line($PLACEMENT, 1)
+    line($PLACEMENT, ($PLACEMENT+$ARMS*math.cos($ANGLE))-(1j*($ARMS*math.sin($ANGLE))))
+    subdivideList = "ALL_TRUE"
+}
+
+struct Main{
+    useshape CantorSet()
+}

@@ -1,0 +1,18 @@
+% fractal of a tree made of squares and triangles 
+% increase the number of recursions to see the tree more and more
+struct BoxTree{
+    % the square
+    line(0, 1)
+    line(0, 1j)
+    line(1j, 1+1j)
+    line(1+1j, 1)
+    % the triangle (uses one of the square's line segments)
+    line(1j, 0.5+1.5j)
+    line(0.5+1.5j, 1+1j)
+    % We only want to build off of the triangle, aka the last 2 line segments.
+    subdivideList = [False, False, False, False, True, True]
+}
+
+struct Main{
+    useshape BoxTree()
+}

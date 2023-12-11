@@ -1,0 +1,25 @@
+% fractal of Serpenski's Triangle
+struct SerpenskiTriangle{
+    % left triangle
+    line(0, 0.5)
+    line(0.5, 0.25+((3**0.5)/4)*1j)
+    line(0.25+((3**0.5)/4)*1j, 0)
+
+    % right triangle
+    line(0.5, 1)
+    line(1, 0.75+((3**0.5)/4)*1j)
+    line(0.75+((3**0.5)/4)*1j, 0.5)
+
+    % top triangle
+    
+    line(0.25+((3**0.5)/4)*1j, 0.75+((3**0.5)/4)*1j)
+    line(0.75+((3**0.5)/4)*1j, 0.5+((3**0.5)/2)*1j)
+    line(0.5+((3**0.5)/2)*1j, 0.25+((3**0.5)/4)*1j)
+    
+
+    subdivideList = "ALL_TRUE"
+}
+
+struct Main{
+    useshape SerpenskiTriangle()
+}

@@ -1,0 +1,20 @@
+% efficient fractal of Serpenski's Triangle
+struct SerpenskiTriangle2{
+    % outer triangle
+    let thing = ((3**0.5)/2)*1j
+    line(0, 1)
+    line(0, 0.5+$thing)
+    line(0.5+$thing, 1)
+
+    % inner triangle
+    line(0.5 + 0.5*(-0.5+$thing), 1 + 0.5*(-0.5+$thing))
+    line(0.5, 0.5 + 0.5*(-0.5+$thing))
+    line(1 + 0.5*(-0.5+$thing), 0.5)
+    
+
+    subdivideList = [False, False, False, True, True, True]
+}
+
+struct Main{
+    useshape SerpenskiTriangle2()
+}
