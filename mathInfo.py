@@ -1,7 +1,7 @@
 
-RECURSIVE_PARTS = [([0.0, 0.0], [1.0, 0.0]), ([0.0, 0.0], [0.0, 1.0]), ([0.0, 1.0], [1.0, 1.0]), ([1.0, 1.0], [1.0, 0.0]), ([0.0, 1.0], [0.5000000000000001, 1.4330127018922192]), ([0.5000000000000001, 1.4330127018922192], [1.0, 1.0])]
-PARTS_TO_SUBDIVIDE = [False, False, False, False, True, True]
+RECURSIVE_PARTS = [([0.0, 0.0], [0.5, 0.5]), ([1.0, 0.0], [0.5, 0.5])]
+PARTS_TO_SUBDIVIDE = [1, 1]
 START = 0
 END = 1
-NUM_RECURSIONS = 10
+NUM_RECURSIONS = 19
 DRAW_BOXES = None

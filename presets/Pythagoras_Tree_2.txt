@@ -1,0 +1,21 @@
+% fractal of a tree made of squares and triangles 
+% increase the number of recursions to see the tree more and more
+struct PythagorasTree2{
+    % the square
+    line(0, 1)
+    line(0, 1j)
+    line(1j, 1+1j)
+    line(1+1j, 1)
+    % the triangle (uses one of the square's line segments)
+    let angle = math.radians(60)
+    let cos = np.cos($angle)/(2**0.5)
+    let sin = np.sin($angle)/(2**0.5)
+    line(1j, $cos+$sin*1j+1j)
+    line($cos+$sin*1j+1j, 1+1j)
+    % We only want to build off of the triangle, aka the last 2 line segments.
+    subdivideList = [False, False, False, False, True, True]
+}
+
+struct Main{
+    useshape PythagorasTree2()
+}
