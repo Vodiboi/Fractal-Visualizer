@@ -595,7 +595,7 @@ def runApp(view=ft.AppView.FLET_APP, version="pygame"):
         case "manim":
             ft.app(target=manim_visualizer, view=view)
         case "pygame":
-            ft.app(target=pygame_visualizer, view=view, assets_dir="assets")
+            ft.app(target=pygame_visualizer, view=view)
         case "save":
             ft.app(target=pygame_for_saving, view=view)
 
