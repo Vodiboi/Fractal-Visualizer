@@ -1,5 +1,6 @@
 from typing import *
 import math
+import numpy as np
 
 class Shape:
     '''

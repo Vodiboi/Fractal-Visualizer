@@ -1,5 +1,5 @@
 % fractal of a man flexing his muscles, or a ram
-struct BodyBuilder{
+struct LevyC{
     % Use 9-10 recursions to see the man, and for optimal viewing set the starting position to be -2-2j and the ending position to be 2-2j
     line(0, 0.5+0.5j)
     line(0.5+0.5j, 1)
@@ -7,5 +7,5 @@ struct BodyBuilder{
 }
 
 struct Main{
-    useshape BodyBuilder()
+    useshape LevyC()
 }

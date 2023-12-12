@@ -1,4 +1,4 @@
-% Anish Fractal
+% Anish's Fractal
 struct Anish{
     let a = 0.2
     line(0, 2*$a-($a*1j))

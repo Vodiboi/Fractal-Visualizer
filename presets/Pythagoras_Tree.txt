@@ -1,6 +1,6 @@
 % fractal of a tree made of squares and triangles 
 % increase the number of recursions to see the tree more and more
-struct BoxTree{
+struct PythagorasTree{
     % the square
     line(0, 1)
     line(0, 1j)
@@ -14,5 +14,5 @@ struct BoxTree{
 }
 
 struct Main{
-    useshape BoxTree()
+    useshape PythagorasTree()
 }
