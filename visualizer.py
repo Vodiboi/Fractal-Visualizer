@@ -24,6 +24,9 @@ def manim_visualizer(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.window_maximized = True
 
+    page.fonts = {"Roboto Mono": "RobotoMono-Regular.ttf",}
+    page.theme = ft.Theme(font_family="Roboto Mono")
+
     # most widgets
     f = ft.TextField(label="Write your code here", multiline=True)
     start_pos = ft.TextField(label="Starting Position")
@@ -186,6 +189,9 @@ def pygame_visualizer(page:ft.Page):
     page.title = "J's Fractal Visualizer"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.window_maximized = True
+
+    page.fonts = {"Roboto Mono": "RobotoMono-Regular.ttf",}
+    page.theme = ft.Theme(font_family="Roboto Mono")
 
     # most widgets
     f = ft.TextField(label="Write your code here", multiline=True)
@@ -390,6 +396,9 @@ def pygame_for_saving(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.window_maximized = True
 
+    page.fonts = {"Roboto Mono": "RobotoMono-Regular.ttf",}
+    page.theme = ft.Theme(font_family="Roboto Mono")
+
     # most widgets
     f = ft.TextField(label="Write your code here", multiline=True)
     start_pos = ft.TextField(label="Starting Position")
@@ -586,7 +595,7 @@ def runApp(view=ft.AppView.FLET_APP, version="pygame"):
         case "manim":
             ft.app(target=manim_visualizer, view=view)
         case "pygame":
-            ft.app(target=pygame_visualizer, view=view)
+            ft.app(target=pygame_visualizer, view=view, assets_dir="assets")
         case "save":
             ft.app(target=pygame_for_saving, view=view)
 

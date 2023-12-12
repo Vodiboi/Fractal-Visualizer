@@ -1,8 +1,10 @@
-import os, contextlib
+import os
+import contextlib
 
 with open(os.devnull, "w") as devnull:
     with contextlib.redirect_stdout(devnull):
         import pygame
+
 import numpy as np
 
 BG_COLOR = 255, 255, 255
@@ -68,6 +70,14 @@ def collapse(grid, factor):
            slices[i, j] = grid[i::factor, j::factor]
     return np.any(slices, axis=(0, 1))
 
+def get_edges(grid):
+    result = np.zeros_like(grid, dtype=bool)
+    result[:-1, :] |= grid[1:, :]
+    result[1:, :] |= grid[:-1, :]
+    result[:, :-1] |= grid[:, 1:]
+    result[:, 1:] |= grid[:, :-1]
+    return np.logical_and(np.logical_not(grid), result)
+
 if __name__ == "__main__":
     from PIL import Image
 
@@ -89,6 +99,8 @@ if __name__ == "__main__":
         grid = get_grid(segments, 1024)
     else:
         grid = np.zeros((1024, 1024), dtype=bool)
+
+    # grid = get_edges(grid)
 
     grid_surf = np.full((1024, 1024, 3), BG_COLOR, dtype=np.uint8)
 
