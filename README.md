@@ -44,9 +44,13 @@ and boom
 
 Note: A popup may appear asking whether to allow flet to access files within a folder of the computer the code is running in. Allow it to, otherwise the images cannot be displayed. Flet is not trying to access your personal files, don't worry, it justs needs to access some files for the code.
 
-## How to use the tool
+## Full Guide to Using the Tool
+
+### The Basics:
 
 The basics of this tool can be learnt with the presets. Select a preset, and then click the button that says `use preset`. This button loads in the preset. By default, the start and end points are `0` and `1`, and the recursion depth is `1`. The start and end points represent the inital position (with that, scale and rotation) of your fractal. To see the fractal, click the `run` button. Play around with these parameters on some samples.
+
+### In Depth:
 
 Now, into the code itself. The language revolves around shapes, which are used as fractals. To learn this language, we will look at an example bit of code.
 
@@ -74,7 +78,7 @@ To define a shape, we say `struct SHAPENAME` followed by curly braces. Line brea
 
 Comments are placed after a `%` symbol, similar to latex, and extend for the rest of the line, similar to python.
 
-Lines are defined with the line command, which takes in 2 points (python complex, ex: `0.5`, `1+2j`, `(math.pi+4)*1j`) for a line to be placed between.
+Lines are defined with the line command, which takes in 2 points (python complex numbers, containing a real and/or imaginary section (defined with a *1j), ex: `0.5`, `1+2j`, `(math.pi+4)*1j`) for a line to be placed between.
 
 Variables are defined using the `let` command. They are very nitpicky. there should be exactly 1 space between the variable name and `=`, and at least 1 space afterwards. The variable name should not contain any spaces. Variables are accesed with `$VAR_NAME` where "VAR_NAME" is the name of the variable. The `$` prevents user overloading of commands in the code, among other things. 
 
@@ -104,4 +108,4 @@ There are 2 possible answers to this. 1, it might just be taking some time to lo
 - A parenthesis was unmatched. Be careful with parentheses.
 - You used "i" to reference a complex number. This program is based on python, so "j" should always be used
 
-If there is no error and the screen doesn't update seemingly, it may be the case that your fractal is so dense that you can't notice the change when increasing recursion, which I have run into myself. There is no fix for this, other than maybe moving the start and end coordinates of your fractal to enlarge it.
+If there is no error and the screen doesn't update seemingly, it may be the case that your fractal is so dense that you can't notice the change when increasing recursion. 
