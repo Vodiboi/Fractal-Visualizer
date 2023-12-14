@@ -290,21 +290,21 @@ def pygame_visualizer(page:ft.Page):
                 if start_pos.value == "" or (not isinstance(eval(start_pos.value), int) and not isinstance(eval(start_pos.value), complex) and not isinstance(eval(start_pos.value), float)):
                     error_log.value = "Error: Invalid Start Pos. Must Be Int or Complex or Float"
                     error_log.update()
-                    return
+                    return -1
                 else:
                     l[i] = "START = " + start_pos.value
             elif l[i].startswith("END = "):
                 if end_pos.value == "" or (not isinstance(eval(end_pos.value), int) and not isinstance(eval(end_pos.value), complex) and not isinstance(eval(start_pos.value), float)):
                     error_log.value = "Error: Invalid End Pos. Must Be Int or Complex or Float"
                     error_log.update()
-                    return
+                    return -1
                 else:
                     l[i] = "END = " + end_pos.value
             elif l[i].startswith("NUM_RECURSIONS = "):
                 if depth.value == "" or (not isinstance(eval(depth.value), int)):
                     error_log.value = "Error: Invalid Number of Recursions. Must Be Int"
                     error_log.update()
-                    return
+                    return -1
                 else:
                     l[i] = "NUM_RECURSIONS = " + depth.value
             elif l[i].startswith("DRAW_BOXES"):
@@ -319,7 +319,8 @@ def pygame_visualizer(page:ft.Page):
         error_log.update()
         code = f.value
         structs = parseThing.generateShapes(code)
-        reloadMath(structs=structs)
+        if reloadMath(structs=structs) == -1:
+            return
 
         try:
             process = subprocess.run(
@@ -592,6 +593,11 @@ def pygame_for_saving(page: ft.Page):
     page.update()
 
 def runApp(view=ft.AppView.FLET_APP, version="pygame"):
+    i2 = image.open("defaultManimImg.png")
+    i2.save(_fsrc)
+
+    i3 = image.open("defaultPygameImage.png")
+    i3.save(_f2src)
     match version:
         case "manim":
             ft.app(target=manim_visualizer, view=view)
@@ -600,12 +606,6 @@ def runApp(view=ft.AppView.FLET_APP, version="pygame"):
         case "save":
             ft.app(target=pygame_for_saving, view=view)
 
-    # code that runs when the app is closed
-    i2 = image.open("defaultManimImg.png")
-    i2.save(_fsrc)
-
-    i3 = image.open("defaultPygameImage.png")
-    i3.save(_f2src)
 
 if __name__ == "__main__":
     runApp()
