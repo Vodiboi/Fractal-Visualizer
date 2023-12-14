@@ -64,9 +64,7 @@ class Shape:
                     self.partsToSubdivide.extend(_shape.partsToSubdivide)
         return ans
     def _strip(self, expr:str) -> str:
-        '''
-        '''
-        for k, v in self.dataTable.items():
+        for k, v in sorted(self.dataTable.items(), key=lambda x: -len(x[0])):
             expr = expr.replace(f"${k}", f"({v})")
         return expr
     

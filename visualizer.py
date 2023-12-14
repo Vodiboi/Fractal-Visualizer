@@ -6,6 +6,7 @@ import subprocess
 import flet as ft
 from PIL import Image as image
 import numpy as np
+import math
 
 import parseThing
 from dimension import getDimension
