@@ -1,6 +1,6 @@
-# Barry's Fractal Visualizer
+# Fractal Visualizer
 
-This is a guide to using Barry's Fractal Visualizer.
+This is a guide to using my Fractal Visualizer tool.
 
 
 ## Setup
